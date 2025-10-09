@@ -15,4 +15,7 @@ router.post(
   reelsController.reelsCreate
 );
 
+// GET/api/reels
+router.get("/", authMiddleware.authUserMiddleware, reelsController.reelsGetAll);
+
 module.exports = router;
