@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const alldayreelsSchema = new mongoose.Schema({
-  name: {
+  fullName: {
     type: String,
     required: true,
   },
@@ -9,6 +9,17 @@ const alldayreelsSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  website: {
+    type: String,
+  },
+  category: {
+    type: String,
   },
   password: {
     type: String,

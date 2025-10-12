@@ -14,9 +14,10 @@ async function authalldayreelsMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const alldareels = await alldayreelsModel.findById(decoded.id);
+    // load the alldayreels document and attach it using the consistent name
+    const alldayreels = await alldayreelsModel.findById(decoded.id);
 
-    req.alldareels = alldareels;
+    req.alldayreels = alldayreels;
 
     next();
   } catch (err) {

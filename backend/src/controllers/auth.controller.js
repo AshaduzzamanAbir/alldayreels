@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { all } = require("../app");
 
 async function registerUser(req, res) {
-  const { fullName, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   const isUserAlreadyExists = await userModel.findOne({
     email,
@@ -19,7 +19,8 @@ async function registerUser(req, res) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await userModel.create({
-    fullName,
+    firstName,
+    lastName,
     email,
     password: hashedPassword,
   });
@@ -89,7 +90,7 @@ function logoutUser(req, res) {
 }
 
 async function registerAlldayreels(req, res) {
-  const { name, email, password } = req.body;
+  const { fullName, email, password, phone, website, category } = req.body;
 
   const isAlreadyAccountExists = await alldayreelsModel.findOne({
     email,
@@ -104,9 +105,12 @@ async function registerAlldayreels(req, res) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const alldayreels = await alldayreelsModel.create({
-    name,
+    fullName,
     email,
     password: hashedPassword,
+    phone,
+    website,
+    category,
   });
 
   const token = jwt.sign(
@@ -123,7 +127,10 @@ async function registerAlldayreels(req, res) {
     alldayreels: {
       _id: alldayreels._id,
       email: alldayreels.email,
-      name: alldayreels.name,
+      fullName: alldayreels.fullName,
+      phone: alldayreels.phone,
+      address: alldayreels.address,
+      category: alldayreels.category,
     },
   });
 }
